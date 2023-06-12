@@ -1,6 +1,6 @@
 {
-  "short_name": "Aplicação React",
-  "name": "Templade Dev Samurai de aplicação React",
+  "short_name": "JuicyBites App",
+  "name": "JuicyBites App de Pedidos de Hambúrgueres",
   "icons": [
     {
       "src": "favicon.ico",
