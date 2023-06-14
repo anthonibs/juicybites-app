@@ -107,6 +107,22 @@
 			"description": "Suco natural de abacaxi com leves incrementos de algumas hortaliças para fortificar sua saúde.",
 			"price": 8,
 			"image": "https://i.imgur.com/VV9qTMh.jpg"
+		},
+		{
+			"id": 4,
+			"snack": "drink",
+			"name": "Mojito virgem",
+			"description": "Uma bebida mista sem álcool é uma bebida estilo coquetel feita sem ingredientes alcoólicos.",
+			"price": 18,
+			"image": "https://i.imgur.com/kLxC0Bt.jpeg"
+		},
+		{
+			"id": 5,
+			"snack": "drink",
+			"name": "Old Whisky",
+			"description": "Este uísque rico e complexo representa o casamento perfeito de uísques de malte, cada um dos quais foi envelhecido individualmente em barris de carvalho durante 21 anos.",
+			"price": 48,
+			"image": "https://i.imgur.com/VV96MW9.jpeg"
 		}
 	],
 	"ice-creams": [
