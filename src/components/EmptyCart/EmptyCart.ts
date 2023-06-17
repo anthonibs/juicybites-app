@@ -1,0 +1,40 @@
+import { darken } from 'polished';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+export const Container = styled.section`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: 1.25rem 0.5rem;
+
+	h2 {
+		max-width: 500px;
+		font-size: 2rem;
+	}
+
+	img {
+		display: block;
+		width: 100%;
+		max-width: 32rem;
+	}
+`;
+
+export const Button = styled(Link)`
+	display: block;
+	background: ${({ theme }) => theme.colors.yellow};
+	width: fit-content;
+	height: 3rem;
+	padding: 0 .875rem;
+	border-radius: 8px;
+	margin: 1rem 0 3rem;
+	font-weight: 500;
+	font-size: 1.25rem;
+	line-height: 3rem;
+	transition: background 0.3s;
+
+	&:hover {
+		background: ${darken(0.1, '#F5CA02')};
+	}
+`;
