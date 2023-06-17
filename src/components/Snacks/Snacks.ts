@@ -16,6 +16,21 @@ export const Container = styled.div`
 		padding: 1.75rem;
 		border-radius: 4px;
 
+		span {
+			position: absolute;
+			top: -0.5rem;
+			left: -0.5rem;
+			background-color: ${({ theme }) => theme.colors.yellow};
+			width: 2rem;
+			height: 2rem;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-weight: 500;
+			font-size: 1.125rem;
+		}
+
 		h2 {
 			margin-bottom: 0.75rem;
 			font-weight: 700;
