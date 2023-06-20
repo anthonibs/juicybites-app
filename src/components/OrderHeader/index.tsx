@@ -8,6 +8,10 @@ import { ReactComponent as CartIcon } from '../../assets/shopping-cart.svg';
 const OrderHeader = () => {
 	const { cart } = useCart();
 
+	const totalAmountOfSnacks = cart.reduce((acc, snack) => {
+		return (acc += snack.quantity);
+	}, 0);
+
 	return (
 		<S.Container>
 			<Link to='/'>
@@ -18,7 +22,7 @@ const OrderHeader = () => {
 				<div>
 					<h3>Meu Pedidos</h3>
 					<span>
-						<strong>{`${cart.length}`.padStart(2, '0')} lanche(s)</strong>
+						<strong>{`${totalAmountOfSnacks}`.padStart(2, '0')} lanche(s)</strong>
 					</span>
 				</div>
 				<CartIcon />
