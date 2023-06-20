@@ -6,7 +6,7 @@ import minusImg from '../../../../assets/circle-minus.svg';
 import plusImg from '../../../../assets/circle-plus.svg';
 
 import { FaTrashAlt } from 'react-icons/fa';
-import ConfirmOrder from 'components/ConfirmOrder';
+import ConfirmOrder from 'components/OrderCloseAction/ConfirmOrder';
 
 const TableDesktop = () => {
 	const { cart, removeSnackFromCart, snackCartIncrement, snackCartDecrement } = useCart();

@@ -10,8 +10,8 @@ const EmptyCart = ({ title }: EmptyCartProps) => {
 	return (
 		<S.Container>
 			<h2>{title}</h2>
-			<S.Button to='/'>Voltar para Início</S.Button>
-			<img src={manAndBurgerImg} alt='Homem com hambúrgier' />
+			<S.Button to='/'>Voltar para Cardápio</S.Button>
+			<img src={manAndBurgerImg} alt='Homem com hambúrguer' />
 		</S.Container>
 	);
 };

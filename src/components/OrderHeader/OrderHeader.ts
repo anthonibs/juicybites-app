@@ -25,11 +25,15 @@ export const Container = styled.div`
 				margin-bottom: 0.125rem;
 				font-weight: 500;
 			}
+
+			strong {
+				color: ${({ theme }) => theme.colors.yellow};
+			}
 		}
 
 		svg {
 			flex-shrink: 0;
-			fill: ${({ theme }) => theme.colors.white};
+			fill: ${({ theme }) => theme.colors.yellow};
 			width: 2.878rem;
 			height: 2.875rem;
 		}
