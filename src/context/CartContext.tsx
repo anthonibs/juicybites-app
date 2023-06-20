@@ -1,6 +1,8 @@
 import { snackEmoji } from 'helpers/snackEmoji';
+import { CustomerData } from 'interfaces/CustomerData';
 import { SnackData } from 'interfaces/SnackData';
 import { ReactNode, createContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 interface CartProviderProps {
@@ -19,13 +21,33 @@ interface CartContextProps {
 	snackCartIncrement: (snack: Snack) => void;
 	snackCartDecrement: (snack: Snack) => void;
 	confirmOrder: () => void;
+	payOrder: (customer: CustomerData) => void;
 }
 
 export const CartContext = createContext({} as CartContextProps);
 CartContext.displayName = 'Shopping Cart';
 
+const localStorageKey = '@shopping-cart';
+
 export const CartProvider = ({ children }: CartProviderProps) => {
-	const [cart, setCart] = useState<Snack[]>([]);
+	const navigate = useNavigate();
+
+	const [cart, setCart] = useState<Snack[]>(() => {
+		const isCartExistent = localStorage.getItem(localStorageKey);
+		if (isCartExistent) {
+			return JSON.parse(isCartExistent);
+		}
+		return [];
+	});
+
+	function saveCart(items: Snack[]) {
+		setCart(items);
+		localStorage.setItem(localStorageKey, JSON.stringify(items));
+	}
+
+	function clearCart() {
+		localStorage.removeItem(localStorageKey);
+	}
 
 	function addSnackIntoCart(snack: SnackData): void {
 		const snackExistentInCart = cart.find(
@@ -45,7 +67,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 			});
 
 			toast.success(`Outro(a) ${snackEmoji(snack.snack)} ${snack.name} adicionando nos pedidos!`);
-			setCart(newCart);
+			saveCart(newCart);
 
 			return;
 		}
@@ -54,12 +76,12 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 		const newCart = [...cart, newSnack];
 
 		toast.success(`${snackEmoji(snack.snack)} ${snack.name} adicionando nos pedidos!`);
-		setCart(newCart);
+		saveCart(newCart);
 	}
 
 	function removeSnackFromCart(snack: Snack) {
 		const newCart = cart.filter((item) => !(item.id === snack.id && item.snack === snack.snack));
-		setCart(newCart);
+		saveCart(newCart);
 	}
 
 	function updateSnackQuantity(snack: Snack, newQuantity: number) {
@@ -82,7 +104,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 			return item;
 		});
 
-		setCart(newCart);
+		saveCart(newCart);
 	}
 
 	function snackCartIncrement(snack: Snack) {
@@ -94,7 +116,14 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 	}
 
 	function confirmOrder() {
-		console.log('object');
+		navigate('/payment');
+	}
+
+	function payOrder(customer: CustomerData) {
+		console.log('payOrder', cart, customer);
+		clearCart();
+		// chamada de API para o backend
+		return;
 	}
 
 	return (
@@ -106,6 +135,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 				snackCartIncrement,
 				snackCartDecrement,
 				confirmOrder,
+				payOrder,
 			}}
 		>
 			{children}
