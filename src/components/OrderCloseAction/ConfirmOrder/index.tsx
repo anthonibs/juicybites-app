@@ -5,7 +5,7 @@ import { currencyFormat } from 'helpers/currencyFormat';
 const ConfirmOrder = () => {
 	const { cart, confirmOrder } = useCart();
 
-	const totalAmout = cart.reduce((acc, item) => (acc += item.subtotal), 0);
+	const totalAmout = cart.reduce((acc, item) => acc += Number(item.subtotal), 0);
 
 	return (
 		<S.Container>
