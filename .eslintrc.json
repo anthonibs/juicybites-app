@@ -28,7 +28,8 @@
 		"eqeqeq": ["error", "always"],
 		"jsx-quotes": ["error", "prefer-single"],
 		"react-hooks/rules-of-hooks": "error",
-		"react-hooks/exhaustive-deps": "warn"
+		"react-hooks/exhaustive-deps": "warn",
+		"no-console": "warn"
 	},
 	"settings": {
 		"import/resolver": {
