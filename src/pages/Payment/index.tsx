@@ -1,12 +1,12 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { IMaskInput, IMask } from 'react-imask';
-
 import { useCart } from '../../hooks/useCart';
 
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { IMaskInput, IMask } from 'react-imask';
 import { schema, FieldValues } from './validationSchema';
 
 import * as S from './Payment';
+
 import Head from 'components/Head';
 import OrderHeader from 'components/OrderHeader';
 import PayOrder from 'components/OrderCloseAction/PayOrder';
@@ -19,7 +19,7 @@ export default function Payment() {
 		control,
 		formState: { errors },
 	} = useForm<FieldValues>({
-		// resolver: yupResolver(schema),
+		resolver: yupResolver(schema),
 		defaultValues: {
 			fullName: '',
 			email: '',
@@ -54,8 +54,8 @@ export default function Payment() {
 						<Controller
 							name='fullName'
 							control={control}
-							render={({ field }) => (
-								<input type='text' id='fullName' autoComplete='name' autoFocus {...field} />
+							render={({ field: { onChange, onBlur, value } }) => (
+								<input required type='text' onChange={onChange} onBlur={onBlur} value={value} />
 							)}
 						/>
 						{errors.fullName && <p className='error'>{errors.fullName.message}</p>}
@@ -67,8 +67,15 @@ export default function Payment() {
 							<Controller
 								name='email'
 								control={control}
-								render={({ field }) => (
-									<input type='email' id='email' autoComplete='email' {...field} />
+								render={({ field: { onChange, onBlur, value } }) => (
+									<input
+										type='email'
+										id='email'
+										autoComplete='email'
+										onChange={onChange}
+										onBlur={onBlur}
+										value={value}
+									/>
 								)}
 							/>
 							{errors.email && <p className='error'>{errors.email.message}</p>}
@@ -79,13 +86,15 @@ export default function Payment() {
 							<Controller
 								name='mobile'
 								control={control}
-								render={({ field }) => (
+								render={({ field: { onChange, onBlur, value } }) => (
 									<IMaskInput
 										type='tel'
 										id='mobile'
 										autoComplete='phone'
 										mask={'(00) 90000-0000'}
-										{...field}
+										onChange={onChange}
+										onBlur={onBlur}
+										value={value}
 									/>
 								)}
 							/>
@@ -97,15 +106,17 @@ export default function Payment() {
 							<Controller
 								name='document'
 								control={control}
-								render={({ field }) => (
+								render={({ field: { onChange, onBlur, value } }) => (
 									<IMaskInput
 										type='text'
 										id='document'
+										onChange={onChange}
+										onBlur={onBlur}
+										value={value}
 										mask={[
 											{ mask: '000.000.000-00', maxLength: 11 },
 											{ mask: '00.000.000/0000-00' },
 										]}
-										{...field}
 									/>
 								)}
 							/>
@@ -120,13 +131,15 @@ export default function Payment() {
 						<Controller
 							name='zipCode'
 							control={control}
-							render={({ field }) => (
+							render={({ field: { onChange, onBlur, value } }) => (
 								<IMaskInput
 									type='text'
 									id='zipCode'
 									style={{ width: '120px' }}
 									mask={'00000-000'}
-									{...field}
+									onChange={onChange}
+									onBlur={onBlur}
+									value={value}
 								/>
 							)}
 						/>
@@ -235,10 +248,13 @@ export default function Payment() {
 						<Controller
 							name='creditCardNumber'
 							control={control}
-							render={({ field }) => (
+							render={({ field: { onChange, onBlur, value } }) => (
 								<IMaskInput
 									type='text'
 									id='creditCardNumber'
+									onChange={onChange}
+									onBlur={onBlur}
+									value={value}
 									mask={[
 										{
 											mask: '0000 000000 0000',
@@ -252,7 +268,6 @@ export default function Payment() {
 											mask: '0000 0000 0000 0000',
 										},
 									]}
-									{...field}
 								/>
 							)}
 						/>
@@ -275,8 +290,11 @@ export default function Payment() {
 							<Controller
 								name='creditCardExpiration'
 								control={control}
-								render={({ field }) => (
+								render={({ field: { onChange, onBlur, value } }) => (
 									<IMaskInput
+										onChange={onChange}
+										onBlur={onBlur}
+										value={value}
 										type='text'
 										id='creditCardExpiration'
 										mask={[
@@ -296,7 +314,6 @@ export default function Payment() {
 												},
 											},
 										]}
-										{...field}
 									/>
 								)}
 							/>
@@ -310,8 +327,15 @@ export default function Payment() {
 							<Controller
 								name='creditCardSecurityCode'
 								control={control}
-								render={({ field }) => (
-									<IMaskInput type='text' id='creditCardSecurityCode' mask={'0000'} {...field} />
+								render={({ field: { onChange, onBlur, value } }) => (
+									<IMaskInput
+										onChange={onChange}
+										onBlur={onBlur}
+										value={value}
+										type='text'
+										id='creditCardSecurityCode'
+										mask={'0000'}
+									/>
 								)}
 							/>
 							{errors.creditCardSecurityCode && (
