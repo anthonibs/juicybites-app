@@ -11,6 +11,11 @@ export const Inner = styled.main`
 	background: ${({ theme }) => theme.colors.gray900};
 	padding: 2rem 2.5rem;
 	border-radius: 8px;
+
+	.error {
+		font-size: 0.8725rem;
+		color: ${({ theme }) => theme.colors.red};
+	}
 `;
 
 export const Form = styled.form`
