@@ -7,13 +7,13 @@ import { currencyFormat } from 'helpers/currencyFormat';
 const PayOrder = () => {
 	const { cart } = useCart();
 
-	const totalAmout = cart.reduce((acc, item) => (acc += item.subtotal), 0);
+	const totalAmount = cart.reduce((acc, item) => (acc += item.quantity * item.price), 0);
 
 	return (
 		<S.Container>
 			<button type='submit'>Pagar</button>
 			<span>
-				Total <strong>{currencyFormat(totalAmout)}</strong>
+				Total <strong>{currencyFormat(totalAmount)}</strong>
 			</span>
 		</S.Container>
 	);
